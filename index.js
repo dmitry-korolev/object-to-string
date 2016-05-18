@@ -1,4 +1,4 @@
 module.exports = {
-    objectToString: require('./ots'),
-    stringToObject: require('./sto')
+    ots: require('./ots'),
+    sto: require('./sto')
 };
