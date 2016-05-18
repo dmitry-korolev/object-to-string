@@ -1,7 +1,7 @@
 {
-  "name": "object-to-string",
+  "name": "ots-object-to-string",
   "version": "1.0.1",
-  "description": "Converts an object to a plain string ({a: 'foo', b: {c: 'bar'}} -> 'a=foo;b|c=bar') and vice versa.",
+  "description": "Converts an object into a plain string recursively ({a: 'foo', b: {c: 'bar'}} -> 'a=foo;b|c=bar') and vice versa.",
   "main": "index.js",
   "scripts": {
     "test": "jest"

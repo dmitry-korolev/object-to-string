@@ -2,7 +2,7 @@
 
 Small utility to convert an object into a string (`{a: 'foo', b: {c: 'bar'}}` -> `'a=foo;b|c=bar'`) and vice versa.
 
-# Usage
+## Usage
 Require:
 ```js
 var objectToString = require('object-to-string');
@@ -23,10 +23,10 @@ import ots from 'object-to-string/ots';
 import sto from 'object-to-string/sto';
 ```
 
-# Tests
+## Tests
 ```
 npm test
 ```
 
-# License
+## License
 [MIT](https://github.com/dmitry-korolev/object-to-string/blob/master/LICENSE.md)
