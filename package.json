@@ -1,6 +1,6 @@
 {
   "name": "object-to-string",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Converts an object to a plain string ({a: 'foo', b: {c: 'bar'}} -> 'a=foo;b|c=bar') and vice versa.",
   "main": "index.js",
   "scripts": {
