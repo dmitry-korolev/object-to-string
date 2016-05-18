@@ -24,18 +24,51 @@ import stringToObject from 'objekto/sto';
 ```
 
 ## Usage
+Convert an object into a string or vice versa:
 ```js
-var str0 = objectToString({a: 'foo'}); // === 'a=foo';
-var str1 = objectToString({a: 'foo', b: 'bar'}); // === 'a=foo;b=bar';
-var str2 = objectToString({
-    a: 'foo',
-    b: 'bar',
-    c: {
-        d: 'foobar'
-    }
-}); // === 'a=foo;b=bar;c|d=foobar';
+var obj0 = {a: 'foo'};
+var str0 = 'a=foo';
+console.log(objectToString(obj0) === str0); // -> true
+console.log(_.isEqual(stringToObject(str0), obj0)); // -> true
+
+var obj1 = {a: 'foo', b: 'bar'};
+var str1 = 'a=foo;b=bar';
+console.log(objectToString(obj1) === str1); // -> true
+console.log(_.isEqual(stringToObject(str1), obj1)); // -> true
+
+var obj2 = {
+   a: 'foo',
+   b: 'bar',
+   c: {
+       d: 'foobar'
+   }
+};
+var str2 = 'a=foo;b=bar;c|d=foobar';
+console.log(objectToString(obj2) === str2); // -> true
+console.log(_.isEqual(stringToObject(str2), obj2)); // -> true
 ```
-See [tests](https://github.com/dmitry-korolev/objekto/blob/master/__tests__/index.js) for other examples and options usage.
+Options:
+```js
+var object = {
+    a: 'foo',
+    b: {
+        c: 'bar'
+    }
+};
+
+var string = 'a~foo||b.c~bar';
+
+var options = {
+    keySeparator: '||',
+    keyValueSeparator: '~',
+    levelSeparator: '.'
+};
+
+console.log(objectToString(object, options) === string); // -> true
+console.log(_.isEqual(stringToObject(string, options), object)); // -> true
+
+```
+See [test cases](https://github.com/dmitry-korolev/objekto/blob/master/__tests__/index.js) for other examples.
 
 ## Tests
 ```
