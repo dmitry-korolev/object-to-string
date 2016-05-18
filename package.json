@@ -1,0 +1,35 @@
+{
+  "name": "object-to-string",
+  "version": "1.0.0",
+  "description": "Converts an object to a plain string ({a: 'foo', b: {c: 'bar'}} -> 'a=foo;b|c=bar') and vice versa.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmitry-korolev/object-to-string.git"
+  },
+  "keywords": [
+    "object",
+    "string",
+    "parsing"
+  ],
+  "author": "Dmitry Korolev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmitry-korolev/object-to-string/issues"
+  },
+  "homepage": "https://github.com/dmitry-korolev/object-to-string#readme",
+  "devDependencies": {
+    "jest-cli": "^12.0.2"
+  },
+  "dependencies": {
+    "lodash": "^4.12.0"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules"
+    ]
+  }
+}
