@@ -50,6 +50,34 @@ const testCases = [
         output: 'a|b|c|d|e|f=foobar'
     },
     {
+        title: 'Insane object',
+        input: {
+            a: {
+                b: {
+                    c: {
+                        d: {
+                            e: {
+                                f: 'whaat'
+                            }
+                        }
+                    },
+                    l: {
+                        n: 'ohno'
+                    }
+                },
+                d: {
+                    c: {
+                        m: 'foo'
+                    },
+                    j: {
+                        o: 'bar'
+                    }
+                }
+            }
+        },
+        output: 'a|b|c|d|e|f=whaat;a|b|l|n=ohno;a|d|c|m=foo;a|d|j|o=bar'
+    },
+    {
         title: 'Settings: custom keySeparator;',
         input: {
             a: 'foo',
