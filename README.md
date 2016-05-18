@@ -35,7 +35,7 @@ var str2 = objectToString({
     }
 }); // === 'a=foo;b=bar;c|d=foobar';
 ```
-See [tests](https://github.com/dmitry-korolev/objekto/blob/master/__tests__/index.js) for other examples
+See [tests](https://github.com/dmitry-korolev/objekto/blob/master/__tests__/index.js) for other examples and options usage.
 
 ## Tests
 ```
