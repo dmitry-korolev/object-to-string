@@ -1,6 +1,6 @@
 {
   "name": "objekto",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Converts an object into a plain string recursively ({a: 'foo', b: {c: 'bar'}} -> 'a=foo;b|c=bar') and vice versa.",
   "main": "index.js",
   "scripts": {
