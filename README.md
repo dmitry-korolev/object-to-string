@@ -1,6 +1,9 @@
-# Object-to-string
+# Objekto
 
-Small utility to convert an object into a string (`{a: 'foo', b: {c: 'bar'}}` -> `'a=foo;b|c=bar'`) and vice versa.
+[Objekto](https://www.npmjs.com/package/objekto) is a small utility to convert an object into a string (`{a: 'foo', b: {c: 'bar'}}` -> `'a=foo;b|c=bar'`) and vice versa.
+```bash
+npm install --save objekto
+```
 
 ## Import
 Require:
@@ -71,7 +74,7 @@ console.log(_.isEqual(stringToObject(string, options), object)); // -> true
 See [test cases](https://github.com/dmitry-korolev/objekto/blob/master/__tests__/index.js) for other examples.
 
 ## Tests
-```
+```bash
 npm test
 ```
 
