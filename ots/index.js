@@ -1,6 +1,7 @@
 // Imports
 const isPlainObject = require('lodash/isPlainObject');
 const toString = require('lodash/toString');
+const checkSeparators = require('../helpers/checkSeparators');
 
 function _objectToString(obj, _settings) {
     if (!isPlainObject(obj)) {
@@ -15,6 +16,8 @@ function _objectToString(obj, _settings) {
     const k = settings.keySeparator;
     const v = settings.keyValueSeparator;
     const l = settings.levelSeparator;
+
+    checkSeparators(k, v, l);
 
     const reKey = (obj, groupKey) => converter(Object.keys(obj).reduce((result, key) => {
         result[groupKey + l + key] = obj[key];

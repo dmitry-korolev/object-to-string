@@ -1,6 +1,7 @@
 // Imports
 const isString = require('lodash/isString');
 const merge = require('lodash/merge');
+const checkSeparators = require('../helpers/checkSeparators');
 
 function stringToObject(str, _settings) {
     if (!isString(str)) {
@@ -19,6 +20,8 @@ function stringToObject(str, _settings) {
     const k = settings.keySeparator;
     const v = settings.keyValueSeparator;
     const l = settings.levelSeparator;
+
+    checkSeparators(k, v, l);
 
     const pathToObject = (path, value) => path.split(l).reduceRight((result, key, index, array) => {
         var tmp = {};
