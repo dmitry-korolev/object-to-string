@@ -1,10 +1,11 @@
 {
   "name": "objekto",
   "version": "1.1.1",
-  "description": "Converts an object into a plain string recursively ({a: 'foo', b: {c: 'bar'}} to 'a=foo;b|c=bar') and vice versa.",
+  "description": "Converts an object into a plain string recursively (`{a: 'foo', b: {c: {d: 'bar'}}}` to `'a=foo;b|c|d=bar'`) and vice versa.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "benchmark": "node __benchmark__"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/dmitry-korolev/objekto",
   "devDependencies": {
+    "benchmark": "^2.1.0",
     "jest-cli": "^12.0.2"
   },
   "jest": {
