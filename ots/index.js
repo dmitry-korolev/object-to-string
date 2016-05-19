@@ -1,34 +1,50 @@
 // Imports
-const isPlainObject = require('lodash/isPlainObject');
-const toString = require('lodash/toString');
-const checkSeparators = require('../helpers/checkSeparators');
+var checkSeparators = require('../helpers/checkSeparators');
 
 function _objectToString(obj, _settings) {
-    if (!isPlainObject(obj)) {
-        return toString(obj);
+    if (!obj || typeof obj !== 'object') {
+        return '' + obj;
     }
 
-    const settings = Object.assign({}, {
+    var defaults = {
         keySeparator: ';',
         keyValueSeparator: '=',
         levelSeparator: '|'
-    }, _settings || {});
-    const k = settings.keySeparator;
-    const v = settings.keyValueSeparator;
-    const l = settings.levelSeparator;
+    };
+    var settings = _settings ? Object.assign({}, defaults, _settings) : defaults;
+    var k = settings.keySeparator;
+    var v = settings.keyValueSeparator;
+    var l = settings.levelSeparator;
 
-    checkSeparators(k, v, l);
+    _settings && checkSeparators(k, v, l);
 
-    const reKey = (obj, groupKey) => converter(Object.keys(obj).reduce((result, key) => {
-        result[groupKey + l + key] = obj[key];
+    function reKey(obj, groupKey) {
+        var result = {},
+            key;
+
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                result[groupKey + l + key] = obj[key];
+            }
+        }
+
+        return converter(result); // eslint-disable-line no-use-before-define
+    }
+
+    function converter(obj) {
+        var result = '',
+            key;
+
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                result += obj[key] && typeof obj[key] === 'object' ?
+                    reKey(obj[key], key) :
+                    key + v + obj[key] + k;
+            }
+        }
+
         return result;
-    }, {}));
-
-    const converter = obj => Object.keys(obj).reduce((result, key) => {
-        return isPlainObject(obj[key]) ?
-            result + reKey(obj[key], key) :
-            result + key + v + toString(obj[key]) + k;
-    }, '');
+    }
 
     return converter(obj);
 }
