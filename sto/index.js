@@ -1,10 +1,10 @@
 // Imports
-const isString = require('lodash/isString');
-const merge = require('lodash/merge');
-const checkSeparators = require('../helpers/checkSeparators');
+var merge = require('lodash/merge');
+var checkSeparators = require('../helpers/checkSeparators');
+var settings = require('../helpers/settings');
 
 function stringToObject(str, _settings) {
-    if (!isString(str)) {
+    if (typeof str !== 'string') {
         return str;
     }
 
@@ -12,39 +12,47 @@ function stringToObject(str, _settings) {
         return {};
     }
 
-    const settings = Object.assign({}, {
-        keySeparator: ';',
-        keyValueSeparator: '=',
-        levelSeparator: '|'
-    }, _settings || {});
-    const k = settings.keySeparator;
-    const v = settings.keyValueSeparator;
-    const l = settings.levelSeparator;
+    var separators = settings(_settings);
+    var k = separators.keySeparator;
+    var v = separators.keyValueSeparator;
+    var l = separators.levelSeparator;
 
-    checkSeparators(k, v, l);
+    _settings && checkSeparators(k, v, l);
 
-    const pathToObject = (path, value) => path.split(l).reduceRight((result, key, index, array) => {
-        var tmp = {};
-        if (index === array.length - 1) {
-            tmp[key] = value;
-        } else {
-            tmp[key] = Object.assign({}, result);
-        }
-        return tmp;
-    }, {});
+    function pathToObject(_path, value) {
+        var result = {},
+            path = _path.split(l),
+            i = path.length - 1,
+            tmp;
 
-    const converter = (str) => str.split(k).reduce((result, keyVal) => {
-        const tmp = keyVal.split(v);
-        if (tmp.length < 2) {
-            throw new SyntaxError('Unable to parse ' + keyVal + '!');
+        for (;i >= 0; i -= 1) {
+            tmp = {};
+            if (i === path.length - 1) {
+                tmp[path[i]] = value;
+            } else {
+                tmp[path[i]] = result;
+            }
+            result = tmp;
         }
 
-        const key = tmp[0];
-        const val = tmp[1];
-        const obj = pathToObject(key, val);
+        return result;
+    }
 
-        return merge(result, obj);
-    }, {});
+    function converter(str) {
+        var result = {},
+            keys = str.split(k),
+            i, tmp;
+
+        for (i = 0; i < keys.length; i += 1) {
+            tmp = keys[i].split(v);
+            if (tmp.length < 2) {
+                throw new SyntaxError('Unable to parse ' + keyVal + '!');
+            }
+            merge(result, pathToObject(tmp[0], tmp[1]));
+        }
+
+        return result;
+    }
 
     return converter(str);
 
