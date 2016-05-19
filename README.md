@@ -1,6 +1,6 @@
 # Objekto
 
-[Objekto](https://www.npmjs.com/package/objekto) is a small utility to convert an object into a string (`{a: 'foo', b: {c: 'bar'}}` to `'a=foo;b|c=bar'`) and vice versa.
+[Objekto](https://www.npmjs.com/package/objekto) is a small utility to convert an object into a string (`{a: 'foo', b: {c: {d: 'bar'}}}` to `'a=foo;b|c|d=bar'`) and vice versa.
 ```bash
 npm install --save objekto
 ```
@@ -79,12 +79,13 @@ npm test
 ```
 
 ## Notice on performance
-You should note that on large and complex objects objectToString is about three times slower than JSON.stringify, stringToObject is about 10 times slower than JSON.parse. Use this utils only in case you really can't use native JSON methods.
+You should note that on large and complex objects objectToString is about **3-4** times slower than JSON.stringify, stringToObject is about **2** times slower than JSON.parse. Run `npm run benchmark` to see for yourself. I suggest to  use this utils only in case you really can't afford native JSON methods.
 
 ## Changelog
+* 1.1.2: Added benchmark.
 * 1.1.1: Removed lodash dependency.
 * 1.1.0: Performance improvements.
-* 1.0.0: Initial release
+* 1.0.0: Initial release.
 
 ## License
 [MIT](https://github.com/dmitry-korolev/objekto/blob/master/LICENSE.md) @ [Dmitry Korolev](http://korolev.dk)
