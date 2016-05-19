@@ -1,5 +1,5 @@
 // Imports
-var merge = require('lodash/merge');
+var merge = require('../helpers/merge');
 var checkSeparators = require('../helpers/checkSeparators');
 var settings = require('../helpers/settings');
 
