@@ -1,20 +1,16 @@
 // Imports
 var checkSeparators = require('../helpers/checkSeparators');
+var settings = require('../helpers/settings');
 
 function _objectToString(obj, _settings) {
     if (!obj || typeof obj !== 'object') {
         return '' + obj;
     }
 
-    var defaults = {
-        keySeparator: ';',
-        keyValueSeparator: '=',
-        levelSeparator: '|'
-    };
-    var settings = _settings ? Object.assign({}, defaults, _settings) : defaults;
-    var k = settings.keySeparator;
-    var v = settings.keyValueSeparator;
-    var l = settings.levelSeparator;
+    var separators = settings(_settings);
+    var k = separators.keySeparator;
+    var v = separators.keyValueSeparator;
+    var l = separators.levelSeparator;
 
     _settings && checkSeparators(k, v, l);
 
@@ -28,7 +24,7 @@ function _objectToString(obj, _settings) {
             }
         }
 
-        return converter(result); // eslint-disable-line no-use-before-define
+        return converter(result);
     }
 
     function converter(obj) {
