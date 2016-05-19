@@ -1,5 +1,4 @@
-jest.unmock('../ots');
-jest.unmock('../sto');
+jest.autoMockOff();
 
 const objectToString = require('../ots');
 const stringToObject = require('../sto');
@@ -139,7 +138,7 @@ describe('Object to string', () => {
 
     testCases.forEach(test => {
         it(test.title, () => {
-            expect(objectToString(test.input, test.settings || {})).toBe(test.output);
+            expect(objectToString(test.input, test.settings)).toBe(test.output);
         });
     });
 });
@@ -147,7 +146,7 @@ describe('Object to string', () => {
 describe('String to object', () => {
     testCases.forEach(test => {
         it(test.title, () => {
-            expect(stringToObject(test.output, test.settings || {})).toEqual(test.input);
+            expect(stringToObject(test.output, test.settings)).toEqual(test.input);
         });
     });
 });
