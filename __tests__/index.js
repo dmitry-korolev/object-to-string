@@ -2,6 +2,8 @@ jest.autoMockOff();
 
 const objectToString = require('../ots');
 const stringToObject = require('../sto');
+const settings = require('../helpers/settings');
+const merge = require('../helpers/merge');
 const testCases = [
     {
         title: 'Empty object',
@@ -148,5 +150,57 @@ describe('String to object', () => {
         it(test.title, () => {
             expect(stringToObject(test.output, test.settings)).toEqual(test.input);
         });
+    });
+});
+
+describe('Settings', () => {
+    var defaults = {
+        keySeparator: ';',
+        keyValueSeparator: '=',
+        levelSeparator: '|'
+    };
+
+    it('should return defaults, if no or empty param is provided', () => {
+        expect(settings()).toEqual(defaults);
+        expect(settings({})).toEqual(defaults);
+    });
+
+    it('should return defaults merged with custom settings', () => {
+        expect(settings({
+            keySeparator: '---'
+        })).toEqual({
+            keySeparator: '---',
+            keyValueSeparator: '=',
+            levelSeparator: '|'
+        });
+
+        expect(settings({
+            keySeparator: '---',
+            keyValueSeparator: '%%%'
+        })).toEqual({
+            keySeparator: '---',
+            keyValueSeparator: '%%%',
+            levelSeparator: '|'
+        });
+
+        expect(settings({
+            keySeparator: '---',
+            keyValueSeparator: '%%%',
+            levelSeparator: '+++'
+        })).toEqual({
+            keySeparator: '---',
+            keyValueSeparator: '%%%',
+            levelSeparator: '+++'
+        });
+    });
+});
+
+describe('merge', () => {
+    it('', () => {
+        expect(merge({}, {a: 'b'})).toEqual({a: 'b'});
+        expect(merge({a: 'b'}, {})).toEqual({a: 'b'});
+        expect(merge({a: 'b'}, {c: 'd'})).toEqual({a: 'b', c: 'd'});
+        expect(merge({a: {b: 'c'}}, {a: {b: 'd'}})).toEqual({a: {b: 'd'}});
+        expect(merge({a: {b: 'c'}}, {a: {c: 'd'}})).toEqual({a: {b: 'c', c: 'd'}});
     });
 });

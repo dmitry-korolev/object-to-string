@@ -1,19 +1,19 @@
-function merge (a, b) {
-    if (a && typeof a === 'object' && b && typeof b === 'object') {
-        for (var key in b) {
-            if (b.hasOwnProperty(key)) {
-                if (a[key] && typeof a[key] === 'object' && b[key] && typeof b[key] === 'object') {
-                    a[key] = merge(a[key], b[key]);
+function merge (left, right) {
+    if (left && typeof left === 'object' && right && typeof right === 'object') {
+        for (var key in right) {
+            if (right.hasOwnProperty(key)) {
+                if (left[key] && typeof left[key] === 'object' && right[key] && typeof right[key] === 'object') {
+                    left[key] = merge(left[key], right[key]);
                 } else {
-                    a[key] = b[key];
+                    left[key] = right[key];
                 }
             }
         }
     } else {
-        a = b;
+        left = right;
     }
 
-    return a;
+    return left;
 }
 
 module.exports = merge;
